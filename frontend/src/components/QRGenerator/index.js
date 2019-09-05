@@ -1,5 +1,6 @@
 import React from "react";
+var QRCode = require('qrcode.react');
 
-export const Index = ({link}) =>
-    <QRCode value={link} />
+export const QRGenerator = ({link}) =>
+    <QRCode value={link} level={"Q"}/>
 
