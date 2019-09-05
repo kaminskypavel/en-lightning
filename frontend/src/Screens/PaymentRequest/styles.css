@@ -17,3 +17,35 @@
 .App-link {
   color: #61dafb;
 }
+
+.payment {
+  color: #333;
+  font-size: 20px;
+  text-align: center;
+}
+
+.payment .header {
+  margin: 50px;
+  border-bottom: 1px solid #eee;
+  text-transform: uppercase;
+  font-family: Lato;
+}
+
+.payment li {
+  list-style: none;
+  cursor: pointer;
+}
+
+.payment button {
+  border: 3px solid #aaa;
+  border-radius: 11px;
+  padding: 15px 20px;
+  color: #aaa;
+  font-size: 37px;
+  background-color: inherit;
+  text-transform: uppercase;
+}
+
+.payment p {
+  font-size: 26px;
+}
