@@ -3,7 +3,7 @@ import './styles.css';
 import Button from "@material-ui/core/Button";
 import {LightningSpinner} from "../../components/Spinner";
 
-class Index extends Component {
+class PaymentReuqest extends Component {
     state = {
         showSpinner: false
     }
@@ -42,4 +42,4 @@ class Index extends Component {
     }
 }
 
-export default Index;
+export default PaymentReuqest;
