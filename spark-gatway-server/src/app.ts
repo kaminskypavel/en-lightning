@@ -8,8 +8,6 @@ import dotenv from 'dotenv';
 import {isEnableMonitoring} from './commons/env';
 import RateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const statusMonitor = require('express-status-monitor')();
 
 dotenv.config();
 
@@ -28,9 +26,6 @@ app.use(
 	})
 );
 
-if (isEnableMonitoring()) {
-	app.use(statusMonitor);
-}
 routes(app);
 
 export default app;
