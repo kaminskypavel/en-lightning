@@ -2,11 +2,13 @@ import React from 'react';
 import SmallSpinner from '../../components/Spinner/Small';
 import LightningInvoice from './LightningInvoice';
 
+const SERVER = 'http://192.168.43.206:4567'
+
 class Invoice extends React.Component {
-  constructor() {
+  constructor(props) {
     super()
 
-    this.generateInvoice()
+    this.generateInvoice(props.coffee)
   }
 
   state = {
@@ -29,22 +31,30 @@ class Invoice extends React.Component {
 
   pollInvoice = () => {
     console.log("Check...")
-    this.setState({ polls: this.state.polls + 1 })
+    fetch(`${ SERVER }/check?id=${ this.state.id } `)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
 
-    if (this.state.polls > 4) {
-      this.clearPolling()
-      this.props.onPaid("aaa")
-    }
-
+        if (data.ready) {
+          this.clearPolling();
+          this.props.onPaid(data.secret)
+        }
+      })
   }
 
-  handleInvoice = () => {
+  handleInvoice = (data) => {
     const handle = setInterval(this.pollInvoice, 500)
-    this.setState({ invoice: 'aaaaa', id: 1000, handle })
+    this.setState({ invoice: data.request, id: data.r_hash, handle })
   }
 
-  generateInvoice = () => {
-    setTimeout(() => this.handleInvoice(), 100)
+  generateInvoice = (coffee) => {
+    const url = `${ SERVER }/add?value=${ coffee[0]}&note=${ coffee[1] }`
+    console.log('URL', url);
+    
+    fetch(url)
+      .then(response => response.json())
+      .then(this.handleInvoice)
   }
 
   render() {

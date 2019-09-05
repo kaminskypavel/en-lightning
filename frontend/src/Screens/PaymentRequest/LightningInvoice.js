@@ -3,11 +3,11 @@ import React from 'react';
 const LightningInvoice = ({ invoice }) => (
   <div>
 
-    <p>
+    <p className='ln-invoice'>
      { invoice }
     </p>
 
-    <a className="button main-button" href={ `lightning://${ invoice }`}>PAY WITH LIGHTNING</a>
+    <a className="button main-button" target="_blank" href={ `lightning://${ invoice }`}>PAY WITH LIGHTNING</a>
   </div>
 )
 

@@ -61,3 +61,9 @@
 .payment .receipt {
   margin: 30px;
 }
+
+.payment .ln-invoice {
+  width: 80%;
+  overflow-wrap: break-word;
+  margin: 20px auto;
+}
