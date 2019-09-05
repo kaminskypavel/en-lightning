@@ -5,13 +5,15 @@
   color: white;
 }
 
-.Vendor-header {
+.Vendor .Vendor-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   border-bottom: 2px solid black;
+  background-color: #282c34;
+
 }
 
 .Vendor-body p {
@@ -51,3 +53,13 @@
   bottom: 10px;
   right: 10px;
 }
+
+.Vendor.active {
+  background-color: darkgreen;
+}
+
+
+.Vendor.error {
+  background-color: darkred;
+}
+

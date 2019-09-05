@@ -30,7 +30,7 @@ export default class extends Component {
     const { status, name, error } = this.state;
 
     return (
-      <div className="Vendor">
+      <div className={ `Vendor ${ status === 'error' && 'error' } ${ status === 'active' && 'active' } ` }>
         <header className="Vendor-header">
           <h1>BTC Coffee Machine</h1>
         </header>
