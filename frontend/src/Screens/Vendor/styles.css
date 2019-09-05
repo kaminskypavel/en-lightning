@@ -1,19 +1,53 @@
 .Vendor {
   text-align: center;
-}
-
-
-.Vendor-header {
   background-color: #282c34;
   min-height: 100vh;
+  color: white;
+}
+
+.Vendor-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  border-bottom: 2px solid black;
 }
 
+.Vendor-body p {
+  font-size: 30px;
+  padding: 10px;
+}
+
+.Vendor-body {
+
+}
 .App-link {
   color: #61dafb;
+}
+
+.reader {
+  width: 300px;
+  margin: 30px auto;
+}
+
+.Vendor button {
+  border: 3px solid #aaa;
+  border-radius: 11px;
+  padding: 15px 20px;
+  color: #aaa;
+  font-size: 37px;
+  background-color: inherit;
+  text-transform: uppercase;
+}
+
+.Vendor .spinner {
+  margin: 50px;
+}
+
+.Vendor .micro {
+  display: block;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
