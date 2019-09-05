@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './styles.css';
 import Button from "@material-ui/core/Button";
 import {LightningSpinner} from "../../components/Spinner";
+import {getServerURL} from "../../commons/env";
 
 class PaymentReuqest extends Component {
     state = {
@@ -19,8 +20,6 @@ class PaymentReuqest extends Component {
                     </div>
                     }
                     <div>
-                        {/*<QRGenerator link="www.google.com"/>*/}
-                        {/*<CircularProgress />*/}
 
                     </div>
                     <br/>
@@ -34,11 +33,17 @@ class PaymentReuqest extends Component {
         );
     }
 
-    openWallet() {
+    async generateInvoice() {
+        const res = await axios.get(`${getServerURL()}/invoice`);
+    }
+
+    async openWallet() {
         this.setState({showSpinner: true});
-        setTimeout(() => {
-            window.open("lightning://8DAuGnTQCLpuyB3uhsWfC2eMQ174py1UD457Pabeumgi4svvJ22cumpiNjECpytQHmsiejWwXLf7w2UwTZuLh2a2B2dcFBriQCxSjgPssYJ7LCMewVs6ZuayAGoLkWzSdrHdiSX1DYmfXoeF2CMGR8gBf4493N2Gsfj94jyWMxS.png")
-        }, 2000)
+        const invoiceId = await this.generateInvoice();
+        alert(invoiceId)
+        // setTimeout(() => {
+        //     window.open("lightning://8DAuGnTQCLpuyB3uhsWfC2eMQ174py1UD457Pabeumgi4svvJ22cumpiNjECpytQHmsiejWwXLf7w2UwTZuLh2a2B2dcFBriQCxSjgPssYJ7LCMewVs6ZuayAGoLkWzSdrHdiSX1DYmfXoeF2CMGR8gBf4493N2Gsfj94jyWMxS.png")
+        // }, 2000)
     }
 }
 

@@ -1,28 +1,41 @@
 import jsend from 'jsend';
 import axios from 'axios';
 import {Request, Response} from 'express';
+import {Invoice, Paid} from "./interfaces";
 
 const charge = require('lightning-charge-client')
 ('http://charge.tiger.hackbtc19.offchain.rocks', 'jpZ9Ex9kedpD1Q')
 
-interface IInvoice {
-	id: string;
-	msatoshi: string;
-	description: string;
-	rhash: string;
-	payreq: string;
-	expires_at: number;
-	created_at: number;
-	metadata: any;
-	status: string;
-}
 
-export const rootController = async (req: Request, res: Response) => {
-	// Create invoice
-	const inv: IInvoice = await charge.invoice({msatoshi: 50, metadata: {customer_id: 123, product_id: 456}})
-	res.redirect(`http://charge.tiger.hackbtc19.offchain.rocks/checkout/${inv.id}`)
+export const redirectPayment = async (req: Request, res: Response) => {
+	const {invoice} = req.query;
+	res.redirect(`http://charge.tiger.hackbtc19.offchain.rocks/checkout/${invoice}`)
 };
 
-export const qsRootController = (req: Request, res: Response) => {
-	res.send(jsend.success(`Hello ${req.query.name}`));
+export const getInvoice = async (req: Request, res: Response) => {
+	const amount = req.query.amount || 50;
+	const inv: Invoice = await charge.invoice({msatoshi: amount});
+	res.jsend.success({invoiceId: inv.id});
+};
+
+export const isPayed = async (req: Request, res: Response) => {
+	const {invoice} = req.query;
+	let result;
+	try {
+		const paidRes: Paid = await charge.fetch(invoice)
+		result = {
+			paid: paidRes.status === "paid",
+			invoice,
+			meta: paidRes
+		}
+	} catch (e) {
+		console.log(e);
+		result = {
+			paid: false,
+			invoice
+		}
+
+	}
+
+	res.jsend.success(result)
 };
