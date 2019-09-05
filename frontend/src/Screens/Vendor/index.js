@@ -2,8 +2,8 @@ import React from 'react';
 import QR from './QR';
 import Vending from './Vending';
 import Error from './Error';
-
-class App extends React.Component {
+import "./index.css"
+class Vendor extends React.Component {
   state = {
     ids: {},
     status: 'ready'
@@ -62,4 +62,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Vendor;
