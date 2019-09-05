@@ -36,7 +36,7 @@
   cursor: pointer;
 }
 
-.payment button {
+.payment button, .payment .button {
   border: 3px solid #aaa;
   border-radius: 11px;
   padding: 15px 20px;
@@ -44,8 +44,20 @@
   font-size: 37px;
   background-color: inherit;
   text-transform: uppercase;
+  display: inline-block;
+  margin: 10px;
+  text-decoration: none;
+}
+
+.payment .button.main-button {
+  color: green;
+  background-color: #beffc7;
 }
 
 .payment p {
   font-size: 26px;
+}
+
+.payment .receipt {
+  margin: 30px;
 }

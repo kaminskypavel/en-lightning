@@ -12,3 +12,8 @@
         transform: rotateZ(360deg);
     }
 }
+
+.spinner {
+    display: block;
+    margin: 30px auto;
+}
