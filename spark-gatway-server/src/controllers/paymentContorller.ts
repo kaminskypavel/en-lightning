@@ -1,11 +1,10 @@
-import jsend from 'jsend';
-import axios from 'axios';
 import {Request, Response} from 'express';
 import {Invoice, Paid} from "./interfaces";
+import dotevn from "dotenv";
 
+dotevn.config()
 const charge = require('lightning-charge-client')
-('http://charge.tiger.hackbtc19.offchain.rocks', 'jpZ9Ex9kedpD1Q')
-
+(process.env.CHARGE_HOST, process.env.CHARGE_API_KEY);
 
 export const redirectPayment = async (req: Request, res: Response) => {
 	const {invoice} = req.query;
