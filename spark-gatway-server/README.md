@@ -10,10 +10,3 @@
 <img src="https://user-images.githubusercontent.com/4253088/35522317-a2b64ee0-0524-11e8-9081-c17084ffaaf5.png" alt="jest" height="100"/>
 <img src="https://user-images.githubusercontent.com/4253088/36342221-c42100aa-1403-11e8-974d-241767bd57a0.png" alt="prettier" height="100"/>
 </div>
-
-### Links
-
-[1] https://tip.ln.bitembassy.org
-[2] https://github.com/ElementsProject/lightning-charge
-[3] https://github.com/ElementsProject/lightning-charge-client-js
-[4] https://github.com/ElementsProject/nanotip/blob/master/nanotip.js
