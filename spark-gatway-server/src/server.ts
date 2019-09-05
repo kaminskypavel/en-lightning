@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import logger from './commons/logger';
 
 dotenv.config();
-const port = process.env.PORT;
+const port = process.env.PORT || 5005;
 app.listen(port, () => {
 	logger.info(`simple-node-typescript-starter server is running`);
 	logger.info(`navigate to http://localhost:${port}/demo`);
