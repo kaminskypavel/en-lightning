@@ -3,11 +3,12 @@ import './styles.css';
 import Button from "@material-ui/core/Button";
 import {LightningSpinner} from "../../components/Spinner";
 import {getServerURL} from "../../commons/env";
+import axios from "axios";
 
 class PaymentReuqest extends Component {
     state = {
         showSpinner: false
-    }
+    };
 
     render() {
         return (
@@ -24,7 +25,8 @@ class PaymentReuqest extends Component {
                     </div>
                     <br/>
                     {!this.state.showSpinner &&
-                    <Button variant="contained" color="primary" onClick={() => this.openWallet()}>
+                    <Button variant="contained" color="primary"
+                            onClick={() => this.openWallet(1000)}>
                         Start Payment
                     </Button>
                     }
@@ -33,17 +35,28 @@ class PaymentReuqest extends Component {
         );
     }
 
-    async generateInvoice() {
-        const res = await axios.get(`${getServerURL()}/invoice`);
+    async generateInvoice(amount = 1000) {
+        const {data: res} = await axios.get(`${getServerURL()}/payment/invoice?amount=${amount}`);
+        return res.data.invoice;
     }
 
-    async openWallet() {
+    async openWallet(amount) {
         this.setState({showSpinner: true});
-        const invoiceId = await this.generateInvoice();
-        alert(invoiceId)
-        // setTimeout(() => {
-        //     window.open("lightning://8DAuGnTQCLpuyB3uhsWfC2eMQ174py1UD457Pabeumgi4svvJ22cumpiNjECpytQHmsiejWwXLf7w2UwTZuLh2a2B2dcFBriQCxSjgPssYJ7LCMewVs6ZuayAGoLkWzSdrHdiSX1DYmfXoeF2CMGR8gBf4493N2Gsfj94jyWMxS.png")
-        // }, 2000)
+        const invoice = await this.generateInvoice(amount);
+        const paylink = `${getServerURL()}/payment/pay?invoice=${invoice.id}`;
+        window.open(paylink);
+        this.pollIsPayed(invoice.id)
+    }
+
+    async pollIsPayed(invoiceId) {
+        const timer = setInterval(async () => {
+            const {data: res} = await axios.get(`${getServerURL()}/payment/isPayed?invoice=${invoiceId}`)
+            console.log(res);
+            if (res.data.paid) {
+                clearInterval(timer);
+                return this.props.history.push(`/success/${invoiceId}`)
+            }
+        }, 4000)
     }
 }
 
