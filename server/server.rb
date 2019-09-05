@@ -18,7 +18,7 @@ class MyApp < Sinatra::Base
   credentials = GRPC::Core::ChannelCredentials.new(certificate)
   stub = Lnrpc::Lightning::Stub.new('127.0.0.1:10009', credentials)
 
-  set :bind, 'localhost'
+  set :bind, '0.0.0.0'
 
   configure do
     enable :cross_origin
@@ -60,7 +60,7 @@ class MyApp < Sinatra::Base
           ready: true,
           value: response.value,
           memo: response.memo,
-          secret: "#{ response.value },#{ Time.now.to_i }"
+          secret: "#{ response.memo },#{ Time.now.to_i }"
       }.to_json
     else
       { ready: false }.to_json
