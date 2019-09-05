@@ -14,8 +14,8 @@ export const redirectPayment = async (req: Request, res: Response) => {
 
 export const getInvoice = async (req: Request, res: Response) => {
 	const amount = req.query.amount || 50;
-	const inv: Invoice = await charge.invoice({msatoshi: amount});
-	res.jsend.success({invoiceId: inv.id});
+	const invoice: Invoice = await charge.invoice({msatoshi: amount});
+	res.jsend.success({invoice});
 };
 
 export const isPayed = async (req: Request, res: Response) => {
