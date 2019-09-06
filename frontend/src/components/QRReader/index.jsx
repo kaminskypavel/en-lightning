@@ -19,6 +19,7 @@ export class QRReader extends Component {
                     onError={this.handleError}
                     onScan={this.handleScan}
                     style={{width: '100%'}}
+                    facingMode={'user'}
                 />
             </div>
         )
