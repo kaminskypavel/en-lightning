@@ -7,7 +7,7 @@ const PaymentInfo = ({ onData}) => (
 
     <p>1. Scan QR to initiate payment</p>
 
-    <QRGenerator size={ 300 } link="https://bit.ly/2kuYj1T"/>
+    <img src="qr.png" alt=""/>
 
     <p>2. Show payment confirmation to camera to proceed</p>
 
